@@ -8,8 +8,7 @@ const ObjectId = require("mongodb").ObjectId;
 recordRoutes.route("/record")
     .get((req, res) => {
     let db_connect = dbo.getDb("employees");
-    db_connect
-        .collection("records")
+    db_connect.collection("records")
         .find({})
         .toArray(function (err, result) {
             if (err) throw err;
@@ -21,8 +20,10 @@ recordRoutes.route("/record")
 recordRoutes.route("/record/:id")
     .get((req, res) => {
     let db_connect = dbo.getDb();
-    let myquery = { _id: ObjectId(req.params.id) };
-    db_connect.collection("records").findOne(myquery, (err, result) => {
+    let myquery = { _id: ObjectId(req.params.id)
+    };
+    db_connect.collection("records")
+    .findOne(myquery, (err, result) => {
         if (err) throw err;
         res.json(result);
     });
@@ -37,7 +38,8 @@ recordRoutes.route("/record/add")
         position: req.body.position,
         level: req.body.level,
     };
-    db_connect.collection("records").insertOne(myobj, (err, res) => {
+    db_connect.collection("records")
+    .insertOne(myobj, (err, res) => {
         if (err) throw err;
         response.json(res);
     });
@@ -55,8 +57,7 @@ recordRoutes.route("/update/:id")
         level: req.body.level,
     },
   };
-  db_connect
-    .collection("records")
+  db_connect.collection("records")
     .updateOne(myquery, newvalues, (err, res) => {
       if (err) throw err;
       console.log("1 document updated");
@@ -68,8 +69,10 @@ recordRoutes.route("/update/:id")
 recordRoutes.route("/:id")
     .delete((req, response) => {
     let db_connect = dbo.getDb();
-    let myquery = { _id: ObjectId(req.params.id) };
-    db_connect.collection("records").deleteOne(myquery, (err, obj) => {
+    let myquery = { _id: ObjectId(req.params.id) 
+    };
+    db_connect.collection("records")
+    .deleteOne(myquery, (err, obj) => {
      if (err) throw err;
         console.log("1 document deleted");
      response.json(obj);
