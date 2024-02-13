@@ -1,6 +1,4 @@
-Start server: 
-`npm run dev`
+Start nodejs/express server: `npm run dev`
 
 
-Start client 
-`npm start`
+Start reactjs client `npm start`
